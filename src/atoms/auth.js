@@ -6,4 +6,9 @@ const userState = atom({
     dangerouslyAllowMutability: true
 })
 
-export { userState }
+const jwtState = atom({
+    key : 'jwtState',
+    default: null,
+})
+
+export { userState, jwtState }
