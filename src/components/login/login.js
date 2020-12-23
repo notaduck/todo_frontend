@@ -26,7 +26,7 @@ const Login = ({ history }) => {
 	return (
 		<div className="flex items-center h-screen w-full bg-gray-100">
 			<div className="w-full bg-white rounded shadow-lg p-8 m-4 md:max-w-sm md:mx-auto">
-				<h1 className="block w-full text-center text-grey-darkest mb-6">Sign Up</h1>
+				<h1 className="block w-full text-center text-grey-darkest mb-6">Sign In</h1>
 				<form className="mb-4 md:flex md:flex-wrap md:justify-between" onSubmit={handleSubmit(onSubmit)}>
 					<div className="flex flex-col mb-4 md:w-full">
 						<label className="mb-2 uppercase font-bold text-lg text-grey-darkest" htmlFor="email">
@@ -49,17 +49,17 @@ const Login = ({ history }) => {
 					</div>
 
 					<button
-						className="block bg-red-300 hover:bg-teal-dark text-white uppercase text-lg mx-auto p-4 rounded"
+						className="block bg-red-400 hover:bg-teal-dark text-white uppercase text-lg mx-auto p-4 rounded"
 						type="submit"
 					>
-						Create Account
+					 Sign in
 					</button>
 				</form>
 				<a
 					className="block w-full text-center no-underline text-sm text-grey-dark hover:text-grey-darker"
-					href="/login"
+					href="/register"
 				>
-					Already have an account?
+					Need an account?
 				</a>
 			</div>
 		</div>

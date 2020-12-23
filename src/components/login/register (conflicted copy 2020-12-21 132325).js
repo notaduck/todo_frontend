@@ -6,36 +6,31 @@ import axios from 'axios'
 const Register = ({ history }) => {
   const { register, handleSubmit, watch, errors } = useForm();
 
- const onSubmit = useCallback(
-    async input => {
+  const onSubmit = useCallback(async input => {
+    const { email, password, first_name, last_name } = input;
 
-      const { email, password, first_name, last_name } = input;
+    await app.auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then(async res => {
 
-      app.auth()
-      .createUserWithEmailAndPassword(email,password)
-      .then(async res =>{
-
+        // send user info to backend
         await axios({
           method: 'post',
           url: 'http://localhost:4000/user',
           data: {
-            id: res.user.uid,
             first_name: first_name,
             last_name: last_name,
+            firebase_id: res.user.uid,
             email: email
           }
-        }).then(e => console.log('register res:', e))
-        .catch(err => alert(err.message))
+        })
 
-        history.push('/')
+      .catch(e => console.warn(e.message))
 
-      })
-    },
-    [history]
-  );
+  }, [history]);
 
   return (
-    <div className="flex items-center h-screen w-full bg-gray-100">
+    <div className="flex items-center h-screen w-full bg-grey-500">
       <div className="w-full bg-white rounded shadow-lg p-8 m-4 md:max-w-sm md:mx-auto">
         <h1 className="block w-full text-center text-grey-darkest mb-6">Sign Up</h1>
         <form className="mb-4 md:flex md:flex-wrap md:justify-between" onSubmit={handleSubmit(onSubmit)}>
@@ -55,7 +50,7 @@ const Register = ({ history }) => {
             <label className="mb-2 uppercase font-bold text-lg text-grey-darkest" htmlFor="password">Password</label>
             <input className="border py-2 px-3 text-grey-darkest" type="password" name="password" id="password" ref={register} />
           </div>
-          <button className="block bg-red-400 hover:bg-teal-dark text-white uppercase text-lg mx-auto p-4 rounded" type="submit">Create Account</button>
+          <button className="block bg-red-300 hover:bg-teal-dark text-white uppercase text-lg mx-auto p-4 rounded" type="submit">Create Account</button>
         </form>
         <a className="block w-full text-center no-underline text-sm text-grey-dark hover:text-grey-darker" href="/login">Already have an account?</a>
       </div>
